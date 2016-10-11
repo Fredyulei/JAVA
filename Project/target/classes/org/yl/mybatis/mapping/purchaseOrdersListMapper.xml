@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.yl.mybatis.mapping.purchaseOrdersListMapper">
+
+
+<resultMap type="org.yl.mybatis.pojo.purchaseOrdersList" id="BaseResultMap">
+
+<id jdbcType="INTEGER" property="id" column="id"/>
+
+<result jdbcType="VARCHAR" property="purchaseOrdersId" column="purchase_orders_id"/>
+
+<result jdbcType="VARCHAR" property="materialsId" column="materials_id"/>
+
+<result jdbcType="VARCHAR" property="number" column="number"/>
+
+</resultMap>
+
+<sql id="Base_Column_List"> id, purchase_orders_id, materials_id, number </sql>
+
+
+<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+select 
+<include refid="Base_Column_List"/>
+from purchase_orders_list where id = #{id,jdbcType=INTEGER} 
+</select>
+
+<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer"> delete from purchase_orders_list where id = #{id,jdbcType=INTEGER} </delete>
+
+<insert id="insert" parameterType="org.yl.mybatis.pojo.purchaseOrdersList"> insert into purchase_orders_list (id, purchase_orders_id, materials_id, number) values (#{id,jdbcType=INTEGER}, #{purchaseOrdersId,jdbcType=VARCHAR}, #{materialsId,jdbcType=VARCHAR}, #{number,jdbcType=VARCHAR}) </insert>
+
+
+<insert id="insertSelective" parameterType="org.yl.mybatis.pojo.purchaseOrdersList">
+insert into purchase_orders_list 
+
+<trim suffixOverrides="," suffix=")" prefix="(">
+
+<if test="id != null"> id, </if>
+
+<if test="purchaseOrdersId != null"> purchase_orders_id, </if>
+
+<if test="materialsId != null"> materials_id, </if>
+
+<if test="number != null"> number, </if>
+
+</trim>
+
+
+<trim suffixOverrides="," suffix=")" prefix="values (">
+
+<if test="id != null"> #{id,jdbcType=INTEGER}, </if>
+
+<if test="purchaseOrdersId != null"> #{purchaseOrdersId,jdbcType=VARCHAR}, </if>
+
+<if test="materialsId != null"> #{materialsId,jdbcType=VARCHAR}, </if>
+
+<if test="number != null"> #{number,jdbcType=VARCHAR}, </if>
+
+</trim>
+
+</insert>
+
+
+<update id="updateByPrimaryKeySelective" parameterType="org.yl.mybatis.pojo.purchaseOrdersList">
+update purchase_orders_list 
+
+<set>
+
+<if test="purchaseOrdersId != null"> purchase_orders_id = #{purchaseOrdersId,jdbcType=VARCHAR}, </if>
+
+<if test="materialsId != null"> materials_id = #{materialsId,jdbcType=VARCHAR}, </if>
+
+<if test="number != null"> number = #{number,jdbcType=VARCHAR}, </if>
+
+</set>
+where id = #{id,jdbcType=INTEGER} 
+</update>
+
+<update id="updateByPrimaryKey" parameterType="org.yl.mybatis.pojo.purchaseOrdersList"> update purchase_orders_list set purchase_orders_id = #{purchaseOrdersId,jdbcType=VARCHAR}, materials_id = #{materialsId,jdbcType=VARCHAR}, number = #{number,jdbcType=VARCHAR} where id = #{id,jdbcType=INTEGER} </update>
+
+</mapper>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.yl.mybatis.mapping.recordMapper">
+
+
+<resultMap type="org.yl.mybatis.pojo.Record" id="BaseResultMap">
+
+<id jdbcType="INTEGER" property="id" column="id"/>
+
+<result jdbcType="VARCHAR" property="code" column="code"/>
+
+<result jdbcType="VARCHAR" property="describe" column="describe"/>
+
+<result jdbcType="VARCHAR" property="type" column="type"/>
+
+<result jdbcType="VARCHAR" property="content" column="content"/>
+
+</resultMap>
+
+<sql id="Base_Column_List"> id, code, describe, type, content </sql>
+
+
+<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+select 
+<include refid="Base_Column_List"/>
+from record where id = #{id,jdbcType=INTEGER} 
+</select>
+
+<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer"> delete from record where id = #{id,jdbcType=INTEGER} </delete>
+
+<insert id="insert" parameterType="org.yl.mybatis.pojo.Record"> insert into record (id, code, describe, type, content) values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}) </insert>
+
+
+<insert id="insertSelective" parameterType="org.yl.mybatis.pojo.Record">
+insert into record 
+
+<trim suffixOverrides="," suffix=")" prefix="(">
+
+<if test="id != null"> id, </if>
+
+<if test="code != null"> code, </if>
+
+<if test="describe != null"> describe, </if>
+
+<if test="type != null"> type, </if>
+
+<if test="content != null"> content, </if>
+
+</trim>
+
+
+<trim suffixOverrides="," suffix=")" prefix="values (">
+
+<if test="id != null"> #{id,jdbcType=INTEGER}, </if>
+
+<if test="code != null"> #{code,jdbcType=VARCHAR}, </if>
+
+<if test="describe != null"> #{describe,jdbcType=VARCHAR}, </if>
+
+<if test="type != null"> #{type,jdbcType=VARCHAR}, </if>
+
+<if test="content != null"> #{content,jdbcType=VARCHAR}, </if>
+
+</trim>
+
+</insert>
+
+
+<update id="updateByPrimaryKeySelective" parameterType="org.yl.mybatis.pojo.Record">
+update record 
+
+<set>
+
+<if test="code != null"> code = #{code,jdbcType=VARCHAR}, </if>
+
+<if test="describe != null"> describe = #{describe,jdbcType=VARCHAR}, </if>
+
+<if test="type != null"> type = #{type,jdbcType=VARCHAR}, </if>
+
+<if test="content != null"> content = #{content,jdbcType=VARCHAR}, </if>
+
+</set>
+where id = #{id,jdbcType=INTEGER} 
+</update>
+
+<update id="updateByPrimaryKey" parameterType="org.yl.mybatis.pojo.Record"> update record set code = #{code,jdbcType=VARCHAR}, describe = #{describe,jdbcType=VARCHAR}, type = #{type,jdbcType=VARCHAR}, content = #{content,jdbcType=VARCHAR} where id = #{id,jdbcType=INTEGER} </update>
+
+</mapper>

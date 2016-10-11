@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.yl.mybatis.mapping.storageRecordMapper">
+
+
+<resultMap type="org.yl.mybatis.pojo.StorageRecord" id="BaseResultMap">
+
+<id jdbcType="INTEGER" property="id" column="id"/>
+
+<result jdbcType="VARCHAR" property="code" column="code"/>
+
+<result jdbcType="VARCHAR" property="describe" column="describe"/>
+
+<result jdbcType="VARCHAR" property="projectId" column="project_id"/>
+
+<result jdbcType="VARCHAR" property="purchaseOrdersId" column="purchase_orders_id"/>
+
+<result jdbcType="VARCHAR" property="mender" column="mender"/>
+
+<result jdbcType="VARCHAR" property="lastTime" column="last_time"/>
+
+</resultMap>
+
+<sql id="Base_Column_List"> id, code, describe, project_id, purchase_orders_id, mender, last_time </sql>
+
+
+<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+select 
+<include refid="Base_Column_List"/>
+from storage_record where id = #{id,jdbcType=INTEGER} 
+</select>
+
+<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer"> delete from storage_record where id = #{id,jdbcType=INTEGER} </delete>
+
+<insert id="insert" parameterType="org.yl.mybatis.pojo.StorageRecord"> insert into storage_record (id, code, describe, project_id, purchase_orders_id, mender, last_time) values (#{id,jdbcType=INTEGER}, #{code,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, #{projectId,jdbcType=VARCHAR}, #{purchaseOrdersId,jdbcType=VARCHAR}, #{mender,jdbcType=VARCHAR}, #{lastTime,jdbcType=VARCHAR}) </insert>
+
+
+<insert id="insertSelective" parameterType="org.yl.mybatis.pojo.StorageRecord">
+insert into storage_record 
+
+<trim suffixOverrides="," suffix=")" prefix="(">
+
+<if test="id != null"> id, </if>
+
+<if test="code != null"> code, </if>
+
+<if test="describe != null"> describe, </if>
+
+<if test="projectId != null"> project_id, </if>
+
+<if test="purchaseOrdersId != null"> purchase_orders_id, </if>
+
+<if test="mender != null"> mender, </if>
+
+<if test="lastTime != null"> last_time, </if>
+
+</trim>
+
+
+<trim suffixOverrides="," suffix=")" prefix="values (">
+
+<if test="id != null"> #{id,jdbcType=INTEGER}, </if>
+
+<if test="code != null"> #{code,jdbcType=VARCHAR}, </if>
+
+<if test="describe != null"> #{describe,jdbcType=VARCHAR}, </if>
+
+<if test="projectId != null"> #{projectId,jdbcType=VARCHAR}, </if>
+
+<if test="purchaseOrdersId != null"> #{purchaseOrdersId,jdbcType=VARCHAR}, </if>
+
+<if test="mender != null"> #{mender,jdbcType=VARCHAR}, </if>
+
+<if test="lastTime != null"> #{lastTime,jdbcType=VARCHAR}, </if>
+
+</trim>
+
+</insert>
+
+
+<update id="updateByPrimaryKeySelective" parameterType="org.yl.mybatis.pojo.StorageRecord">
+update storage_record 
+
+<set>
+
+<if test="code != null"> code = #{code,jdbcType=VARCHAR}, </if>
+
+<if test="describe != null"> describe = #{describe,jdbcType=VARCHAR}, </if>
+
+<if test="projectId != null"> project_id = #{projectId,jdbcType=VARCHAR}, </if>
+
+<if test="purchaseOrdersId != null"> purchase_orders_id = #{purchaseOrdersId,jdbcType=VARCHAR}, </if>
+
+<if test="mender != null"> mender = #{mender,jdbcType=VARCHAR}, </if>
+
+<if test="lastTime != null"> last_time = #{lastTime,jdbcType=VARCHAR}, </if>
+
+</set>
+where id = #{id,jdbcType=INTEGER} 
+</update>
+
+<update id="updateByPrimaryKey" parameterType="org.yl.mybatis.pojo.StorageRecord"> update storage_record set code = #{code,jdbcType=VARCHAR}, describe = #{describe,jdbcType=VARCHAR}, project_id = #{projectId,jdbcType=VARCHAR}, purchase_orders_id = #{purchaseOrdersId,jdbcType=VARCHAR}, mender = #{mender,jdbcType=VARCHAR}, last_time = #{lastTime,jdbcType=VARCHAR} where id = #{id,jdbcType=INTEGER} </update>
+
+</mapper>
